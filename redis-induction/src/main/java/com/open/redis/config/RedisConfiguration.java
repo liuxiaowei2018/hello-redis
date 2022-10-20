@@ -23,10 +23,14 @@ public class RedisConfiguration {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         // 设置 RedisConnection 工厂
         template.setConnectionFactory(factory);
+
         // 使用 String 序列化方式，序列化 KEY 。
         template.setKeySerializer(RedisSerializer.string());
         // 使用 JSON 序列化方式（库是 Jackson），序列化 VALUE -> GenericJackson2JsonRedisSerializer
         template.setValueSerializer(RedisSerializer.json());
+        template.setHashKeySerializer(RedisSerializer.string());
+        template.setHashValueSerializer(RedisSerializer.json());
+
         return template;
     }
 
