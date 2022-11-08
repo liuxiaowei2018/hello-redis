@@ -1,3 +1,4 @@
+#  redisson配置文件优先级高于springboot配置文件优先级
 clusterServersConfig:
   # 连接空闲超时 如果当前连接池里的连接数量超过了最小空闲连接数，而同时有连接空闲时间超过了该数值，那么这些连接将会自动被关闭，并从连接池里去掉。时间单位是毫秒。
   idleConnectionTimeout: 10000
@@ -41,6 +42,10 @@ clusterServersConfig:
     - "redis://172.31.2.27:7002"
   #集群扫描间隔时间 单位毫秒
   scanInterval: 1000
-threads: 0
-nettyThreads: 0
+  pingConnectionInterval: 0
+  keepAlive: false
+  tcpNoDelay: false
+threads: 16
+nettyThreads: 32
 codec: !<org.redisson.codec.JsonJacksonCodec> {}
+transportMode: "NIO"

@@ -5,10 +5,22 @@ spring:
     port: 16379
     #password: # Redis 服务器密码，默认为空。生产中，一定要设置 Redis 密码！
     database: 0 # Redis 数据库号，默认为 0 。
-    timeout: 0 # Redis 连接超时时间，单位：毫秒。
-    # 对应 RedissonProperties 类
+    #timeout: 3000   # 连接超时时间，单位毫秒，默认为0。也可以这么写：3s
+    #ssl: false      # 是否启用SSL连接，默认false
+    #pool: #连接池配置
+    #  max-active: 8 # 最大活跃连接数，默认8个。
+    #  max-idle: 8   # 最大空闲连接数，默认8个。
+    #  max-wait: -1  # 获取连接的最大等待时间，默认-1，表示无限制，单位毫秒。
+    #  min-idle: 0   # 最小空闲连接数，默认0。
+    #sentinel:
+    #  master: myMaster             #哨兵master
+    #  nodes: host1:port,host2:port #哨兵节点
+    #cluster:
+    #  max-redirects:               #集群模式下，集群最大转发的数量
+    #  nodes: host1:port,host2:port #集群节点
+    #对应 RedissonProperties 类
     #redisson:
-      #config: classpath:redisson.yml # 具体的每个配置项，见 org.redisson.config.Config 类。
+      #config: classpath:redisson.yml #具体的每个配置项，见 org.redisson.config.Config 类。
 
 server:
   port: 18765
