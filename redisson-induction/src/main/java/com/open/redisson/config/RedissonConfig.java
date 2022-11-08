@@ -20,11 +20,11 @@ public class RedissonConfig {
      *
      * @return org.redisson.api.RedissonClient
      */
-    @Bean(destroyMethod = "shutdown")
-    public RedissonClient redisson() {
-        Config config = new Config();
-        // 创建单例模式的配置
-        config.useSingleServer().setAddress("redis://" + "ip" + ":6379");
-        return Redisson.create(config);
-    }
+//    @Bean(destroyMethod = "shutdown")
+//    public RedissonClient redisson() {
+//        Config config = new Config();
+//        // 创建单例模式的配置
+//        config.useSingleServer().setAddress("redis://" + "ip" + ":16379");
+//        return Redisson.create(config);
+//    }
 }

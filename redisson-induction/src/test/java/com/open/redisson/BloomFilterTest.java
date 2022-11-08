@@ -1,10 +1,12 @@
 package com.open.redisson;
 
+import com.open.HelloApplication;
 import com.open.redisson.BloomFilter.BloomFilterService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.redisson.api.RBloomFilter;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,11 +18,25 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @Slf4j
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = HelloApplication.class)
 public class BloomFilterTest {
 
     @Autowired
     private BloomFilterService bloomFilterService;
+    @Autowired
+    private RedissonClient redissonClient;
+
+    @Test
+    public void testBloomFilterSimple() {
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter("person");
+        // 初始化布隆过滤器，预计统计元素数量为55000000，期望误差率为0.03
+        bloomFilter.tryInit(55000000L, 0.03);
+        bloomFilter.add("Tom");
+        bloomFilter.add("Jack");
+        System.out.println(bloomFilter.count());   //2
+        System.out.println(bloomFilter.contains("Tom"));  //true
+        System.out.println(bloomFilter.contains("Linda"));  //false
+    }
 
     @Test
     public void testBloomFilter() {
